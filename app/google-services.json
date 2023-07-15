@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1004482406110",
+    "project_id": "quiz-kids-79e22",
+    "storage_bucket": "quiz-kids-79e22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004482406110:android:f27d27750bc2a70355444f",
+        "android_client_info": {
+          "package_name": "com.example.quizkids2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004482406110-i90p1iq91i450ahhv3ftfu130o2e63k3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quizkids2",
+            "certificate_hash": "ef909365e03e6d46edd5d4c6e98d7dead7d2f678"
+          }
+        },
+        {
+          "client_id": "1004482406110-u3gha7soo2hrpbv0gvid2c4sv555caeh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF3YXaAkKsOMrwFf4LlthuxkM7WyLVu_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004482406110-u3gha7soo2hrpbv0gvid2c4sv555caeh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

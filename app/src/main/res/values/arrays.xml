@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="categories">
+        <item>Science</item>
+        <item>Animals</item>
+        <item>Sports</item>
+        <item>History</item>
+        <item>Music</item>
+
+    </string-array>
+
+    <integer-array name="images">
+        <item>@drawable/science1</item>
+        <item>@drawable/animals</item>
+        <item>@drawable/sports1</item>
+        <item>@drawable/history1</item>
+        <item>@drawable/music1</item>
+    </integer-array>
+
+    <integer-array name="colors">
+        <item>@color/roseStart</item>
+        <item>@color/roseEnd</item>
+        <item>@color/blueStart</item>
+        <item>@color/blueEnd</item>
+        <item>@color/greenStart</item>
+        <item>@color/greenEnd</item>
+        <item>@color/purpleStart</item>
+        <item>@color/purpleEnd</item>
+    </integer-array>
+
+</resources>
