@@ -1,12 +1,10 @@
 package com.example.quizkids2.objects;
 
-import java.util.ArrayList;
-
 public class Answer {
 
-    public Answer(String answer, boolean isCorrect) {
+    public Answer(String answer, boolean correct) {
         this.answer = answer;
-        this.isCorrect = isCorrect;
+        this.correct = correct;
     }
     public Answer() {
     }
@@ -19,15 +17,15 @@ public class Answer {
     }
 
     public boolean isCorrect() {
-        return isCorrect;
+        return correct;
     }
 
     public void setCorrect(boolean correct) {
-        isCorrect = correct;
+        this.correct = correct;
     }
 
     private String answer;
-    private boolean isCorrect;
+    private boolean correct;
 
 
 

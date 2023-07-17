@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends Fragment {
 
@@ -64,6 +65,10 @@ public class LoginFragment extends Fragment {
                                     Toast toast = Toast.makeText(getActivity(), "Login successful.", Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.TOP, 0, 300);
                                     toast.show();
+
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    String nickname = user.getDisplayName();
+
 
                                     Fragment fragment = new CategoriesFragment();
                                     FragmentManager fragmentManager = getParentFragmentManager();

@@ -21,4 +21,7 @@
     <color name="greenStart">#ACF29E</color>
     <color name="greenEnd">#3DB924</color>
 
+    <color name="correctAnswer">#00FF00</color>
+    <color name="wrongAnswer">#FF0000</color>
+
 </resources>

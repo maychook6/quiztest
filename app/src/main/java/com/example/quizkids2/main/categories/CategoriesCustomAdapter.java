@@ -17,34 +17,19 @@ import java.util.List;
 public class CategoriesCustomAdapter extends RecyclerView.Adapter<CategoriesCustomAdapter.ViewHolder> {
     private static final String TAG = "CategoriesCustomAdapter";
 
-    private List<String> categories;
+    private List<Category> categories;
 
-    private final CheckBoxRecyclerViewInterface checkBoxRecyclerViewInterface;
-
-    public void updateCategories(List<String> list) {
+    public void updateCategories(List<Category> list) {
         this.categories = list;
         notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final CheckBox checkBox;
-        public ViewHolder(View v, CheckBoxRecyclerViewInterface checkBoxRecyclerViewInterface) {
 
+        public ViewHolder(View v) {
             super(v);
-
             checkBox = v.findViewById(R.id.categoryCB);
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (checkBoxRecyclerViewInterface != null) {
-                        int pos = getAdapterPosition();
-
-                        if(pos != RecyclerView.NO_POSITION) {
-                            checkBoxRecyclerViewInterface.onItemCheck(pos);
-                        }
-                    }
-                }
-            });
         }
 
         public CheckBox getCheckBox() {
@@ -53,9 +38,8 @@ public class CategoriesCustomAdapter extends RecyclerView.Adapter<CategoriesCust
 
     }
 
-    public CategoriesCustomAdapter(ArrayList<String> dataSet, CheckBoxRecyclerViewInterface checkBoxRecyclerViewInterface) {
-        this.categories = dataSet;
-        this.checkBoxRecyclerViewInterface = checkBoxRecyclerViewInterface;
+    public CategoriesCustomAdapter(ArrayList<Category> categories) {
+        this.categories = categories;
     }
 
     @Override
@@ -63,26 +47,22 @@ public class CategoriesCustomAdapter extends RecyclerView.Adapter<CategoriesCust
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_list_categories, viewGroup, false);
 
-        return new ViewHolder(v, checkBoxRecyclerViewInterface);
+        return new ViewHolder(v);
     }
+
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getCheckBox().setText(categories.get(position));
-        viewHolder.getCheckBox().setChecked(false);
-        viewHolder.getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(compoundButton.isChecked())
-                {
-                    compoundButton.setChecked(true);
-                }
-                else
-                {
-                    compoundButton.setChecked(false);
-                }
+        viewHolder.getCheckBox().setText(categories.get(position).title);
+        viewHolder.getCheckBox().setChecked(categories.get(position).isChecked);
+        viewHolder.getCheckBox().setOnCheckedChangeListener((compoundButton, b) -> {
+            if (compoundButton.isChecked()) {
+                compoundButton.setChecked(true);
+                categories.get(position).setChecked(true);
+            } else {
+                compoundButton.setChecked(false);
+                categories.get(position).setChecked(false);
             }
         });
-
     }
 
     @Override
