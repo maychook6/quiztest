@@ -12,14 +12,14 @@ public class QA {
     private String category;
     private ArrayList<Answer> answers;
 
+    public QA() {
+
+    }
+
     public QA(String question, ArrayList<Answer> answers, String category) {
         this.question = question;
         this.answers = answers;
         this.category = category;
-    }
-
-    public QA() {
-
     }
 
     public String getQuestion() {

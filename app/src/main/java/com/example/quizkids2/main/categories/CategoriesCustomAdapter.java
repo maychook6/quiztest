@@ -1,14 +1,12 @@
 package com.example.quizkids2.main.categories;
 
 import com.example.quizkids2.R;
-import com.example.quizkids2.main.questions.RecyclerViewInterface;
+import com.example.quizkids2.objects.Category;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -52,8 +50,8 @@ public class CategoriesCustomAdapter extends RecyclerView.Adapter<CategoriesCust
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getCheckBox().setText(categories.get(position).title);
-        viewHolder.getCheckBox().setChecked(categories.get(position).isChecked);
+        viewHolder.getCheckBox().setText(categories.get(position).getTitle());
+        viewHolder.getCheckBox().setChecked(categories.get(position).isChecked());
         viewHolder.getCheckBox().setOnCheckedChangeListener((compoundButton, b) -> {
             if (compoundButton.isChecked()) {
                 compoundButton.setChecked(true);

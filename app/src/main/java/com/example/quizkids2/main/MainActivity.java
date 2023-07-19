@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.example.quizkids2.R;
 import com.example.quizkids2.main.account.AccountFragment;
 import com.example.quizkids2.main.account.LoginFragment;
+import com.example.quizkids2.objects.User;
 
 public class MainActivity extends AppCompatActivity {
 

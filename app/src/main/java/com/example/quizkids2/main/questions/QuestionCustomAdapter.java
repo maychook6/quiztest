@@ -17,34 +17,34 @@ public class QuestionCustomAdapter extends RecyclerView.Adapter<QuestionCustomAd
     private ArrayList<Answer> answers;
     private final RecyclerViewInterface recyclerViewInterface;
     private int selectedAnswerPosition = -1;
-    private boolean timedout = false;
+    private boolean timedOut = false;
 
 
     public void updateAnswers(ArrayList<Answer> list) {
         this.answers = list;
         this.selectedAnswerPosition = -1;
-        this.timedout = false;
+        this.timedOut = false;
         notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final CardView cardView;
-        private final TextView textView;
+        private final CardView answerCardView;
+        private final TextView answerTextView;
 
         public ViewHolder(View v) {
             super(v);
 
-            cardView = v.findViewById(R.id.answerCard);
-            textView = v.findViewById(R.id.answer);
+            answerCardView = v.findViewById(R.id.answerCard);
+            answerTextView = v.findViewById(R.id.answer);
         }
 
-        public CardView getCardView() {
-            return cardView;
+        public CardView getAnswerCardView() {
+            return answerCardView;
         }
 
-        public TextView getTextView() {
-            return textView;
+        public TextView getAnswerTextView() {
+            return answerTextView;
         }
     }
 
@@ -63,10 +63,10 @@ public class QuestionCustomAdapter extends RecyclerView.Adapter<QuestionCustomAd
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getTextView().setText(answers.get(position).getAnswer());
-        viewHolder.getCardView().setCardElevation(8);
+        viewHolder.getAnswerTextView().setText(answers.get(position).getAnswer());
+        viewHolder.getAnswerCardView().setCardElevation(8);
         viewHolder.itemView.setOnClickListener(v -> {
-            if (timedout) return;
+            if (timedOut) return;
 
             if (selectedAnswerPosition != -1) {
                 notifyItemChanged(selectedAnswerPosition);
@@ -79,22 +79,22 @@ public class QuestionCustomAdapter extends RecyclerView.Adapter<QuestionCustomAd
             }
         });
 
-        if (!timedout) {
+        if (!timedOut) {
             if (selectedAnswerPosition == position) {
-                viewHolder.getCardView().setCardBackgroundColor(Color.DKGRAY);
+                viewHolder.getAnswerCardView().setCardBackgroundColor(Color.DKGRAY);
             } else {
-                viewHolder.getCardView().setCardBackgroundColor(Color.GRAY);
+                viewHolder.getAnswerCardView().setCardBackgroundColor(Color.GRAY);
             }
         } else {
-            viewHolder.getCardView().setCardBackgroundColor(Color.GRAY);
+            viewHolder.getAnswerCardView().setCardBackgroundColor(Color.GRAY);
 
             if (answers.get(position).isCorrect()) {
-                viewHolder.getCardView().setCardBackgroundColor(Color.GREEN);
+                viewHolder.getAnswerCardView().setCardBackgroundColor(Color.GREEN);
                 return;
             }
 
             if (selectedAnswerPosition == position) {
-                viewHolder.getCardView().setCardBackgroundColor(Color.RED);
+                viewHolder.getAnswerCardView().setCardBackgroundColor(Color.RED);
             }
 
         }
@@ -106,7 +106,7 @@ public class QuestionCustomAdapter extends RecyclerView.Adapter<QuestionCustomAd
     }
 
     public void onTimeout() {
-        this.timedout = true;
+        this.timedOut = true;
         notifyDataSetChanged();
     }
 }

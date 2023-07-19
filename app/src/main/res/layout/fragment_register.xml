@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".main.account.RegisterFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -19,37 +20,40 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:layout_marginVertical="8dp"/>
+            android:text="may@quizkids.com" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:layout_marginVertical="8dp"/>
+            android:text="may123" />
 
 
         <EditText
             android:id="@+id/nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
-            android:hint="Nickname"
+            android:hint="@string/nickname"
             android:inputType="textPersonName"
-            android:layout_marginVertical="8dp"/>
+            android:text="may" />
 
         <Button
             android:id="@+id/register_btn"

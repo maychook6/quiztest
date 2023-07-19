@@ -2,6 +2,9 @@ package com.example.quizkids2.objects;
 
 public class Answer {
 
+    private String answer;
+    private boolean correct;
+
     public Answer(String answer, boolean correct) {
         this.answer = answer;
         this.correct = correct;
@@ -23,11 +26,6 @@ public class Answer {
     public void setCorrect(boolean correct) {
         this.correct = correct;
     }
-
-    private String answer;
-    private boolean correct;
-
-
 
 }
 

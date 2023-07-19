@@ -5,6 +5,7 @@
     android:id="@+id/fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".main.categories.CategoriesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,7 @@
         app:layout_constraintBottom_toTopOf="@+id/startGameBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/skipBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/selectAllBtn" />
 
     <Button
         android:id="@+id/startGameBtn"
@@ -27,18 +28,18 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Start Game"
+        android:text="@string/start_game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/skipBtn"
+        android:id="@+id/selectAllBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="skip"
+        android:text="@string/select_all"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

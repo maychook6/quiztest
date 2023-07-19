@@ -2,6 +2,8 @@ package com.example.quizkids2.objects;
 
 import com.google.firebase.firestore.DocumentId;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class User {
@@ -11,12 +13,20 @@ public class User {
     private String email;
     private String nickname;
     private Integer score;
+    private boolean canPlay;
+    private long timeToPlay;
+    private ArrayList<String> questionsCorrectIds;
 
-    public User(String email, String nickname, Integer score, ArrayList<String> questionsCorrectIds) {
+    public User() {
+    }
+
+    public User(String email, String nickname, Integer score, long timeToPlay, boolean canPlay, ArrayList<String> questionsCorrectIds) {
         this.email = email;
         this.nickname = nickname;
         this.score = score;
-        QuestionsCorrectIds = questionsCorrectIds;
+        this.questionsCorrectIds = questionsCorrectIds;
+        this.timeToPlay = timeToPlay;
+        this.canPlay = canPlay;
     }
 
     public String getId() {
@@ -50,14 +60,32 @@ public class User {
     public void setScore(Integer score) {
         this.score = score;
     }
+    public long getTimeToPlay() {
+        return timeToPlay;
+    }
+
+    public void setTimeToPlay(long timeToPlay) {
+        this.timeToPlay = timeToPlay;
+    }
+
+    public boolean isCanPlay() {
+        return canPlay;
+    }
+
+    public void setCanPlay(boolean canPlay) {
+        this.canPlay = canPlay;
+    }
 
     public ArrayList<String> getQuestionsCorrectIds() {
-        return QuestionsCorrectIds;
+        return questionsCorrectIds;
     }
 
     public void setQuestionsCorrectIds(ArrayList<String> questionsCorrectIds) {
-        QuestionsCorrectIds = questionsCorrectIds;
+        this.questionsCorrectIds = questionsCorrectIds;
     }
 
-    private ArrayList<String> QuestionsCorrectIds;
+    public void addQuestionCorrectId (String questionCorrectId) {
+        this.questionsCorrectIds.add(questionCorrectId);
+    }
+
 }

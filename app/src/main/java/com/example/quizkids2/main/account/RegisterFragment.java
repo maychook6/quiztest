@@ -3,7 +3,6 @@ package com.example.quizkids2.main.account;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import android.text.TextUtils;
@@ -16,9 +15,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.quizkids2.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.quizkids2.main.mainScreen.MainScreenFragment;
+import com.example.quizkids2.main.utils.FragmentNavigator;
+import com.example.quizkids2.main.utils.Transition;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,10 +28,10 @@ import java.util.Map;
 
 public class RegisterFragment extends Fragment {
 
-    View view;
-    FirebaseAuth mAuth;
-    EditText inputEmail, inputPassword, inputNickname;
-    Button registerBtn;
+    private View view;
+    private FirebaseAuth mAuth;
+    private EditText inputEmail, inputPassword, inputNickname;
+    private Button registerBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,9 +69,8 @@ public class RegisterFragment extends Fragment {
 
                            openDialog();
 
-                           Fragment fragment = new AccountFragment();
-                           FragmentManager fragmentManager = getParentFragmentManager();
-                           fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
+                           new FragmentNavigator(getParentFragmentManager()).navigateToFragment(new AccountFragment(), Transition.ADD);
+
                            updateUserProfile();
                        } else {
                            Toast toast = Toast.makeText(getActivity(), "Registration failed", Toast.LENGTH_LONG);
@@ -95,20 +93,17 @@ public class RegisterFragment extends Fragment {
         userdata.put("email", user.getEmail());
         userdata.put("nickname", inputNickname.getText().toString());
         userdata.put("score", 0);
-        userdata.put("QuestionsCorrectIds", new ArrayList<String>());
+        userdata.put("questionsCorrectIds", new ArrayList<String>());
+        userdata.put("timeToPlay", 0);
+        userdata.put("canPlay", true);
 
         db.collection("users").document(user.getUid())
                 .set(userdata);
-
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("userId", user.getUid());
-        editor.apply();
-
     }
 
     public void openDialog() {
-        DialogFragment dialog = new DialogFragment();
+        RegisterDialogFragment dialog = new RegisterDialogFragment();
         dialog.show(getParentFragmentManager(), "dialog");
     }
+
 }
