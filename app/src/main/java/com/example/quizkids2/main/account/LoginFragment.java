@@ -23,12 +23,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginFragment extends Fragment {
+
+    //TODO can be removed
     private FirebaseFirestore db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         Button loginBtn = view.findViewById(R.id.login_btn);
@@ -36,7 +37,7 @@ public class LoginFragment extends Fragment {
         EditText password = view.findViewById(R.id.password);
 
         loginBtn.setOnClickListener(v -> {
-
+            //TODO extract to a method "login()"
             String usernameStr, passwordStr;
             usernameStr = username.getText().toString();
             passwordStr = password.getText().toString();
@@ -52,10 +53,11 @@ public class LoginFragment extends Fragment {
             }
 
             mAuth.signInWithEmailAndPassword(usernameStr, passwordStr)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {  //TODO use lamda expression
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                //TODO extract to a method "showToast(String message)" and use it in the else statement
                                 Toast toast = Toast.makeText(getActivity(), "Login successful.", Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.TOP, 0, 300);
                                 toast.show();

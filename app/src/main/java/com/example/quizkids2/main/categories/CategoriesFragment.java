@@ -45,6 +45,7 @@ public class CategoriesFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         startGameBtn.setOnClickListener(v -> {
+            //TODO extract to a method "onStartGameClicked()"
             ArrayList<String> checkedCategories = getCheckedCategories();
             if (checkedCategories.size() == 0) {
                 openDialog("Please select at least on category, or skip to choose all.");
@@ -54,6 +55,7 @@ public class CategoriesFragment extends Fragment {
         });
 
         selectAllBtn.setOnClickListener(v -> {
+            //TODO extract to a method "onSelectAllClicked()"
             for (Category category: categories) {
                 category.setChecked(true);
             }
@@ -98,5 +100,4 @@ public class CategoriesFragment extends Fragment {
         CategoriesDialogFragment dialog = new CategoriesDialogFragment(dialogMessage);
         dialog.show(getParentFragmentManager(), "dialog");
     }
-
 }

@@ -43,7 +43,9 @@ public class MainScreenFragment extends Fragment {
         return view;
     }
 
+    //TODO rename to fetchUser()
     private void fetchData(FragmentNavigator fragmentNavigator) {
+        //TODO int instead of Integer
         Integer timeToWait = 15;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -67,7 +69,6 @@ public class MainScreenFragment extends Fragment {
                     }
                 } else {
                     fragmentNavigator.navigateToFragment(new CategoriesFragment(), Transition.ADD);
-
                 }
             }
         });
@@ -75,7 +76,6 @@ public class MainScreenFragment extends Fragment {
 
     public static long calculateTimestampDifference(long timestamp1, long timestamp2) {
         long differenceInMillis = Math.abs(timestamp2 - timestamp1);
-
         return TimeUnit.MILLISECONDS.toMinutes(differenceInMillis);
     }
 
@@ -83,5 +83,4 @@ public class MainScreenFragment extends Fragment {
         TimeDialogFragment dialog = new TimeDialogFragment(time);
         dialog.show(getParentFragmentManager(), "dialog");
     }
-
 }

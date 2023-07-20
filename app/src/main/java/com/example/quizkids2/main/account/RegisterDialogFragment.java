@@ -18,9 +18,12 @@ public class RegisterDialogFragment extends androidx.fragment.app.DialogFragment
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Registration Successful, please login.")
+                //TODO use lamda expression
                 .setNeutralButton("Go login", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //TODO use util class FragmentNavigator
                         Fragment fragment = new AccountFragment();
                         FragmentManager fragmentManager = getParentFragmentManager();
                         fragmentManager.beginTransaction().add(R.id.fragmentContainerView, fragment).addToBackStack(null).commit();

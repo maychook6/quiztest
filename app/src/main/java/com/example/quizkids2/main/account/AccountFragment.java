@@ -16,8 +16,8 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        Button loginBtnMain = view.findViewById(R.id.login_btn_main);
-        Button registerBtnMain = view.findViewById(R.id.register_btn_main);
+        Button loginBtnMain = view.findViewById(R.id.login_btn_main); //TODO change to loginBtn (also view id)
+        Button registerBtnMain = view.findViewById(R.id.register_btn_main); //TODO change to registerBtn (also view id)
         FragmentNavigator fragmentNavigator =  new FragmentNavigator(getParentFragmentManager());
 
         loginBtnMain.setOnClickListener(v -> {

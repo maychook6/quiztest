@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriesCustomAdapter extends RecyclerView.Adapter<CategoriesCustomAdapter.ViewHolder> {
+    //TODO can be removed
     private static final String TAG = "CategoriesCustomAdapter";
 
     private List<Category> categories;

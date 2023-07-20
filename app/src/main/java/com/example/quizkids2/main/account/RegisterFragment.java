@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//TODO remove unused imports
 import com.example.quizkids2.main.utils.FragmentNavigator;
 import com.example.quizkids2.main.utils.Transition;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,14 +27,19 @@ import java.util.Map;
 
 public class RegisterFragment extends Fragment {
 
+    //TODO Field can be converted to a local variable
     private View view;
     private FirebaseAuth mAuth;
     private EditText inputEmail, inputPassword, inputNickname;
+
+    //TODO Field can be converted to a local variable
     private Button registerBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //TODO remove comment
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_register, container, false);
         mAuth = FirebaseAuth.getInstance();
@@ -44,7 +50,7 @@ public class RegisterFragment extends Fragment {
 
 
        registerBtn.setOnClickListener(view -> {
-
+           //TODO extract to a method "register()"
            String email = inputEmail.getText().toString();
            String password = inputPassword.getText().toString();
 
@@ -61,6 +67,7 @@ public class RegisterFragment extends Fragment {
            mAuth.createUserWithEmailAndPassword(email, password)
                    .addOnCompleteListener(task -> {
                        if (task.isSuccessful()) {
+                           //TODO extract to a method "showToast(String message)" and use it in the else statement
                            Toast toast = Toast.makeText(getActivity(), "Account created", Toast.LENGTH_SHORT);
                            toast.setGravity(Gravity.TOP, 0, 300);
                            toast.show();
@@ -83,7 +90,6 @@ public class RegisterFragment extends Fragment {
     }
 
     private void updateUserProfile() {
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -103,5 +109,4 @@ public class RegisterFragment extends Fragment {
         RegisterDialogFragment dialog = new RegisterDialogFragment();
         dialog.show(getParentFragmentManager(), "dialog");
     }
-
 }

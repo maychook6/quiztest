@@ -12,6 +12,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+//TODO remove unused
 import com.google.firebase.firestore.core.OrderBy;
 
 
@@ -28,7 +29,6 @@ public class ScoreboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view =  inflater.inflate(R.layout.fragment_scoreboard, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.scoreList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -44,7 +44,6 @@ public class ScoreboardFragment extends Fragment {
 
     public void fetchUsers(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         CollectionReference colRef = db.collection("users");
 
         colRef.orderBy("score", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
@@ -57,5 +56,4 @@ public class ScoreboardFragment extends Fragment {
             }
         });
     }
-
 }

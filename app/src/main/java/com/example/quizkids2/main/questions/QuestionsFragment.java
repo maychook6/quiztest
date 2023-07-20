@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.quizkids2.R;
 import com.example.quizkids2.main.mainScreen.MainScreenFragment;
+//TODO remove
 import com.example.quizkids2.objects.Answer;
 import com.example.quizkids2.objects.QA;
 import com.example.quizkids2.objects.User;
@@ -32,6 +33,7 @@ import java.util.Random;
 import java.util.Collections;
 
 
+//TODO remove unused imports
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -47,23 +49,24 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
     public static final String ARG_CATEGORIES_LIST = "categoriesChecked";
     private ArrayList<String> categories;
     private final List<QA> listQA = new ArrayList<>();
-    private TextView question;
-    private TextView roundTimer;
-    private Button nextQ;
+    private TextView question; //TODO questionTextView or questionTV
+    private TextView roundTimer; //TODO what does round time mean, maybe just timerTextView or timerTV
+    private Button nextQ; //TODO rename to nextQuestionBtn
     private List<ImageView> hearts = new ArrayList<>();
     private boolean isCorrect = false;
     private QuestionCustomAdapter adapter;
     private User user;
     private Integer scoreCounter;
     private Integer heartCounter;
+    //TODO remove into method "getRandomIndex"
     private final Random random = new Random();
+    //TODO No need to initiate this here (can remove " = random.nextInt(); " )
     private Integer randomIndex = random.nextInt();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         categories = getArguments().getStringArrayList(ARG_CATEGORIES_LIST);
 
         View view = inflater.inflate(R.layout.fragment_questions, container, false);
@@ -82,7 +85,7 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
 
         RecyclerView recyclerView = view.findViewById(R.id.score);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new QuestionCustomAdapter(new ArrayList<Answer>(), this);
+        adapter = new QuestionCustomAdapter(new ArrayList<>(), this);
 
         heartCounter = 3;
         scoreCounter = 0;
@@ -98,8 +101,8 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
         return view;
     }
 
+    //TODO rename to fetchUser()
     private void fetchData() {
-
         db = FirebaseFirestore.getInstance();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -114,8 +117,8 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
         });
     }
 
+    //TODO rename to fetchQaList
     private void fetchListQA() {
-
         CollectionReference colRef = db.collection("qa");
         colRef.whereIn("category", categories).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -137,19 +140,16 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
     }
 
     private void updateQA() {
-
         if (heartCounter == 0) {
             heartCounter = 3;
         }
 
         if (listQA.size() > 0) {
-
             randomIndex =  getRandomIndex();
             question.setText(listQA.get(randomIndex).getQuestion());
             shuffleAnswers();
             adapter.updateAnswers(listQA.get(randomIndex).getAnswers());
             resetTimer(nextQ);
-
         }
     }
 
@@ -189,6 +189,7 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
 
                     if (heartCounter == 0) {
                         user.setTimeToPlay(System.currentTimeMillis());
+                        //TODO check if possible to marge line 192 and 194 to one update instead of two api calls
                         db.collection("users").document(user.getId()).update("timeToPlay", System.currentTimeMillis());
                         user.setCanPlay(false);
                         db.collection("users").document(user.getId()).update("canPlay", false);
@@ -202,9 +203,7 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
                         } else {
                             scoreCounter = 0;
                             openDialog("Oops!\nYou're out oh hearts\nCome back in 15 minutes.", "Main screen", new MainScreenFragment());
-
                         }
-
                     }
                 }
             }

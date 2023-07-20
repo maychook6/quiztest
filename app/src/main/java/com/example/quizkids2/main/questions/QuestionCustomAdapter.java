@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+//TODO change class name to AnswersCustomAdapter
 public class QuestionCustomAdapter extends RecyclerView.Adapter<QuestionCustomAdapter.ViewHolder> {
     private ArrayList<Answer> answers;
     private final RecyclerViewInterface recyclerViewInterface;
@@ -34,7 +35,6 @@ public class QuestionCustomAdapter extends RecyclerView.Adapter<QuestionCustomAd
 
         public ViewHolder(View v) {
             super(v);
-
             answerCardView = v.findViewById(R.id.answerCard);
             answerTextView = v.findViewById(R.id.answer);
         }
@@ -79,6 +79,7 @@ public class QuestionCustomAdapter extends RecyclerView.Adapter<QuestionCustomAd
             }
         });
 
+        //TODO extract to a method "HandleAnswerBackgroundColor()" (lines 83-100)
         if (!timedOut) {
             if (selectedAnswerPosition == position) {
                 viewHolder.getAnswerCardView().setCardBackgroundColor(Color.DKGRAY);
