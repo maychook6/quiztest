@@ -20,10 +20,9 @@ import java.util.Arrays;
 
 public class ScoreboardFragment extends Fragment {
 
-    RecyclerView recyclerView;
     private ScoreboardCustomAdapter adapter;
     private User user;
-    private ArrayList<User> allUsers = new ArrayList<>();
+    private final ArrayList<User> allUsers = new ArrayList<>();
 
 
     @Override
@@ -31,7 +30,7 @@ public class ScoreboardFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_scoreboard, container, false);
-        recyclerView = view.findViewById(R.id.scoreList);
+        RecyclerView recyclerView = view.findViewById(R.id.scoreList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         adapter = new ScoreboardCustomAdapter(allUsers);
 

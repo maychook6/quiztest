@@ -1,10 +1,7 @@
 package com.example.quizkids2.main.mainScreen;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,13 +74,9 @@ public class MainScreenFragment extends Fragment {
     }
 
     public static long calculateTimestampDifference(long timestamp1, long timestamp2) {
-        long timeInMillis1 = timestamp1;
-        long timeInMillis2 = timestamp2;
-        long differenceInMillis = Math.abs(timeInMillis2 - timeInMillis1);
+        long differenceInMillis = Math.abs(timestamp2 - timestamp1);
 
-        long differenceInMinutes = TimeUnit.MILLISECONDS.toMinutes(differenceInMillis);
-
-        return differenceInMinutes;
+        return TimeUnit.MILLISECONDS.toMinutes(differenceInMillis);
     }
 
     public void openDialog(long time) {

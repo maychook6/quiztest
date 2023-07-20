@@ -1,12 +1,9 @@
 package com.example.quizkids2.main.account;
 import com.example.quizkids2.R;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,14 +16,10 @@ import android.widget.Toast;
 import com.example.quizkids2.main.mainScreen.MainScreenFragment;
 import com.example.quizkids2.main.utils.FragmentNavigator;
 import com.example.quizkids2.main.utils.Transition;
-import com.example.quizkids2.objects.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginFragment extends Fragment {

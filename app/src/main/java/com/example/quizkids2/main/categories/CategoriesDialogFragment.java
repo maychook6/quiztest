@@ -6,11 +6,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import com.example.quizkids2.R;
-import com.example.quizkids2.main.account.AccountFragment;
 
 public class CategoriesDialogFragment extends androidx.fragment.app.DialogFragment {
 

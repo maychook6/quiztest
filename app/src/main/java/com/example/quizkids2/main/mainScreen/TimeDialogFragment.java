@@ -6,12 +6,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import com.example.quizkids2.R;
-
-import java.sql.Timestamp;
 
 public class TimeDialogFragment extends androidx.fragment.app.DialogFragment {
 

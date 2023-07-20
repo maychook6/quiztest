@@ -1,7 +1,5 @@
 package com.example.quizkids2.main.questions;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +18,6 @@ import com.example.quizkids2.objects.Answer;
 import com.example.quizkids2.objects.QA;
 import com.example.quizkids2.objects.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,23 +31,32 @@ import java.util.List;
 import java.util.Random;
 import java.util.Collections;
 
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TimePicker;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.Calendar;
+
 public class QuestionsFragment extends Fragment implements RecyclerViewInterface {
     public static final String ARG_CATEGORIES_LIST = "categoriesChecked";
     private ArrayList<String> categories;
-    private List<QA> listQA = new ArrayList<>();
+    private final List<QA> listQA = new ArrayList<>();
     private TextView question;
     private TextView roundTimer;
     private Button nextQ;
-    private ImageView heartNo1;
-    private ImageView heartNo2;
-    private ImageView heartNo3;
-    private List<ImageView> hearts = new ArrayList<ImageView>();
+    private List<ImageView> hearts = new ArrayList<>();
     private boolean isCorrect = false;
     private QuestionCustomAdapter adapter;
     private User user;
     private Integer scoreCounter;
     private Integer heartCounter;
-    private Random random = new Random();
+    private final Random random = new Random();
     private Integer randomIndex = random.nextInt();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -62,9 +68,9 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
 
         View view = inflater.inflate(R.layout.fragment_questions, container, false);
 
-        heartNo1 = view.findViewById(R.id.heartNo3);
-        heartNo2 = view.findViewById(R.id.heartNo2);
-        heartNo3 = view.findViewById(R.id.heartNo1);
+        ImageView heartNo1 = view.findViewById(R.id.heartNo3);
+        ImageView heartNo2 = view.findViewById(R.id.heartNo2);
+        ImageView heartNo3 = view.findViewById(R.id.heartNo1);
         hearts = Arrays.asList(heartNo1, heartNo2, heartNo3);
 
         roundTimer = view.findViewById(R.id.timer);
@@ -144,8 +150,6 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
             adapter.updateAnswers(listQA.get(randomIndex).getAnswers());
             resetTimer(nextQ);
 
-        } else {
-            //nextQ.setEnabled(false);
         }
     }
 
@@ -170,8 +174,10 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
 
             public void onFinish() {
                 adapter.onTimeout();
+
                 nextQ.setAlpha(1f);
                 nextQ.setEnabled(true);
+
                 if (isCorrect) {
                     scoreCounter++;
                     user.addQuestionCorrectId(listQA.get(randomIndex).getId());
@@ -180,6 +186,7 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
                 } else {
                     heartCounter--;
                     hearts.get(heartCounter).setVisibility(View.GONE);
+
                     if (heartCounter == 0) {
                         user.setTimeToPlay(System.currentTimeMillis());
                         db.collection("users").document(user.getId()).update("timeToPlay", System.currentTimeMillis());
@@ -194,6 +201,8 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
                             openDialog("You've beaten your highest score!\nWell done!\nHearts will be refilled in 15 minutes.", "Main screen", new MainScreenFragment());
                         } else {
                             scoreCounter = 0;
+                            openDialog("Oops!\nYou're out oh hearts\nCome back in 15 minutes.", "Main screen", new MainScreenFragment());
+
                         }
 
                     }

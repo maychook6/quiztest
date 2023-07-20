@@ -1,10 +1,10 @@
 package com.example.quizkids2.main.account;
+import com.example.quizkids2.R;
+import com.example.quizkids2.main.utils.FragmentNavigator;
+import com.example.quizkids2.main.utils.Transition;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.quizkids2.R;
-import com.example.quizkids2.main.mainScreen.MainScreenFragment;
 import com.example.quizkids2.main.utils.FragmentNavigator;
 import com.example.quizkids2.main.utils.Transition;
 import com.google.firebase.auth.FirebaseAuth;
