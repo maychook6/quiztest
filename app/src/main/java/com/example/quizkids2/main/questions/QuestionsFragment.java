@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import com.example.quizkids2.R;
 import com.example.quizkids2.main.mainScreen.MainScreenFragment;
-//TODO remove
-import com.example.quizkids2.objects.Answer;
 import com.example.quizkids2.objects.QA;
 import com.example.quizkids2.objects.User;
 import com.google.firebase.auth.FirebaseAuth;

@@ -2,6 +2,16 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aclonica</item>
+        <item>@font/andika</item>
+        <item>@font/andika_new_basic</item>
         <item>@font/autour_one</item>
+        <item>@font/blinker</item>
+        <item>@font/bungee_shade</item>
+        <item>@font/calligraffitti</item>
+        <item>@font/crafty_girls</item>
+        <item>@font/dancing_script_bold</item>
+        <item>@font/monofett</item>
+        <item>@font/niramit_medium</item>
+        <item>@font/niramit_semibold</item>
     </array>
 </resources>

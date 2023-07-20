@@ -14,25 +14,18 @@ import java.util.ArrayList;
 
 public class ScoreboardCustomAdapter extends RecyclerView.Adapter<ScoreboardCustomAdapter.ViewHolder> {
 
-    //TODO make final
-    private ArrayList<User> allUsers;
+    private final ArrayList<User> allUsers;
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final CardView cardView;
         private final TextView highScore;
         private final TextView nickname;
         private final TextView place;
 
         public ViewHolder(View v) {
             super(v);
-            cardView = v.findViewById(R.id.scoreCard);
+
             highScore = v.findViewById(R.id.highScore);
             nickname = v.findViewById(R.id.nickname);
             place = v.findViewById(R.id.place);
-        }
-
-        //TODO remove if unused
-        public CardView getCardView() {
-            return cardView;
         }
 
         public TextView getHighScoreView() {
@@ -65,7 +58,7 @@ public class ScoreboardCustomAdapter extends RecyclerView.Adapter<ScoreboardCust
         Integer placePos = position +1;
         viewHolder.getUserView().setText(allUsers.get(position).getNickname());
         viewHolder.getHighScoreView().setText(allUsers.get(position).getScore().toString());
-        viewHolder.getPlace().setText(placePos.toString());
+        viewHolder.getPlace().setText(placePos.toString() + "." );
     }
 
     @Override

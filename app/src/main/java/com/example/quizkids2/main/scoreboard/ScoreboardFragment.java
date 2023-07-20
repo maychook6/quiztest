@@ -12,12 +12,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-//TODO remove unused
-import com.google.firebase.firestore.core.OrderBy;
-
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class ScoreboardFragment extends Fragment {
 

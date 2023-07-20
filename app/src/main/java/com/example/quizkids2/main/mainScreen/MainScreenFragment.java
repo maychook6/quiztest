@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.quizkids2.R;
 import com.example.quizkids2.main.categories.CategoriesFragment;
 import com.example.quizkids2.main.scoreboard.ScoreboardFragment;
@@ -22,18 +25,28 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainScreenFragment extends Fragment {
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_screen, container, false);
         FragmentNavigator fragmentNavigator =  new FragmentNavigator(getParentFragmentManager());
 
+//        String nickname = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
         Button playBtn = view.findViewById(R.id.playBtn);
         Button scoreboardBtn = view.findViewById(R.id.scoreboardBtn);
 
+//        TextView welcome = view.findViewById(R.id.welcomeLogin);
+//
+//        welcome.setText("Welcome " + nickname);
+//        welcome.setVisibility(View.INVISIBLE);
+//        welcome.postDelayed(() -> welcome.setVisibility(View.VISIBLE), 1000);
+//        YoYo.with(Techniques.FadeIn)
+//                .duration(2500)
+//                .playOn(welcome);
+
         playBtn.setOnClickListener(view1 -> {
-            fetchData(fragmentNavigator);
+            fetchUser(fragmentNavigator);
         });
 
         scoreboardBtn.setOnClickListener(view12 -> {
@@ -44,9 +57,8 @@ public class MainScreenFragment extends Fragment {
     }
 
     //TODO rename to fetchUser()
-    private void fetchData(FragmentNavigator fragmentNavigator) {
-        //TODO int instead of Integer
-        Integer timeToWait = 15;
+    private void fetchUser(FragmentNavigator fragmentNavigator) {
+        int timeToWait = 15;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

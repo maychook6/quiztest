@@ -8,19 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class CategoriesDialogFragment extends androidx.fragment.app.DialogFragment {
-    //TODO make final
-    private String dialogMessage;
+    private final String dialogMessage;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(dialogMessage)
-                .setNeutralButton("OK", new DialogInterface.OnClickListener() { //TODO use lamda expression
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
+                .setNeutralButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
 
         return builder.create();
     }

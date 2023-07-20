@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -79,23 +80,28 @@ public class QuestionCustomAdapter extends RecyclerView.Adapter<QuestionCustomAd
             }
         });
 
+        int unansweredColor = ContextCompat.getColor(viewHolder.answerCardView.getContext(), R.color.pinkGradient);
+        int answeredColor = ContextCompat.getColor(viewHolder.answerCardView.getContext(), R.color.answeredPink);
+        int rightAnswerColor = ContextCompat.getColor(viewHolder.answerCardView.getContext(), R.color.rightAnswer);
+        int wrongAnswerColor = ContextCompat.getColor(viewHolder.answerCardView.getContext(), R.color.wrongAnswer);
+
         //TODO extract to a method "HandleAnswerBackgroundColor()" (lines 83-100)
         if (!timedOut) {
             if (selectedAnswerPosition == position) {
-                viewHolder.getAnswerCardView().setCardBackgroundColor(Color.DKGRAY);
+                viewHolder.getAnswerCardView().setCardBackgroundColor(answeredColor);
             } else {
-                viewHolder.getAnswerCardView().setCardBackgroundColor(Color.GRAY);
+                viewHolder.getAnswerCardView().setCardBackgroundColor(unansweredColor);
             }
         } else {
-            viewHolder.getAnswerCardView().setCardBackgroundColor(Color.GRAY);
+            viewHolder.getAnswerCardView().setCardBackgroundColor(unansweredColor);
 
             if (answers.get(position).isCorrect()) {
-                viewHolder.getAnswerCardView().setCardBackgroundColor(Color.GREEN);
+                viewHolder.getAnswerCardView().setCardBackgroundColor(rightAnswerColor);
                 return;
             }
 
             if (selectedAnswerPosition == position) {
-                viewHolder.getAnswerCardView().setCardBackgroundColor(Color.RED);
+                viewHolder.getAnswerCardView().setCardBackgroundColor(wrongAnswerColor);
             }
 
         }

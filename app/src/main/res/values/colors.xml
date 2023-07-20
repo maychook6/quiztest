@@ -23,4 +23,12 @@
 
     <color name="red">#FF0000</color>
 
+
+    <color name="orangeGradient">#FDA150</color>
+    <color name="pinkGradient">#F591C6</color>
+    <color name="pinkBackground">#FDEBF9</color>
+    <color name="answeredPink">#DC61A3</color>
+    <color name="wrongAnswer">#E16051</color>
+    <color name="rightAnswer">#8FDE61</color>
+
 </resources>

@@ -5,7 +5,7 @@
     android:id="@+id/fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/pinkBackground"
     tools:context=".main.categories.CategoriesFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -27,30 +27,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:src="@drawable/heartpng"
-            app:tint="@color/red" />
+            android:src="@drawable/heart"
+            app:tint="@color/wrongAnswer" />
 
         <ImageView
             android:id="@+id/heartNo2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:src="@drawable/heartpng"
-            app:tint="#FF0000"/>
+            android:src="@drawable/heart"
+            app:tint="@color/wrongAnswer"/>
 
         <ImageView
             android:id="@+id/heartNo1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:src="@drawable/heartpng"
-            app:tint="@color/red"/>
+            android:src="@drawable/heart"
+            app:tint="@color/wrongAnswer"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
         app:layout_constraintBottom_toTopOf="@+id/score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +75,7 @@
 
     <TextView
         android:id="@+id/timer"
+        android:textSize="15sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

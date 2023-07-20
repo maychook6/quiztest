@@ -9,19 +9,13 @@ import androidx.annotation.Nullable;
 
 public class TimeDialogFragment extends androidx.fragment.app.DialogFragment {
 
-    //TODO make final
-    private long time;
+    private final long time;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Not yet!\nYou have " + time + " minutes to go!")
-                .setNeutralButton("Close", new DialogInterface.OnClickListener() { //TODO use lamda expression
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-        });
+                .setNeutralButton("Close", (dialogInterface, i) -> dialogInterface.dismiss());
 
         return builder.create();
     }

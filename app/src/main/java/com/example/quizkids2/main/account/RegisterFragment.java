@@ -14,9 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//TODO remove unused imports
-import com.example.quizkids2.main.utils.FragmentNavigator;
-import com.example.quizkids2.main.utils.Transition;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,26 +24,19 @@ import java.util.Map;
 
 public class RegisterFragment extends Fragment {
 
-    //TODO Field can be converted to a local variable
-    private View view;
     private FirebaseAuth mAuth;
     private EditText inputEmail, inputPassword, inputNickname;
-
-    //TODO Field can be converted to a local variable
-    private Button registerBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //TODO remove comment
 
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_register, container, false);
+        View view1 = inflater.inflate(R.layout.fragment_register, container, false);
         mAuth = FirebaseAuth.getInstance();
-        registerBtn = view.findViewById(R.id.register_btn);
-        inputEmail = view.findViewById(R.id.username);
-        inputPassword = view.findViewById(R.id.password);
-        inputNickname = view.findViewById(R.id.nickname);
+        Button registerBtn = view1.findViewById(R.id.register_btn);
+        inputEmail = view1.findViewById(R.id.username);
+        inputPassword = view1.findViewById(R.id.password);
+        inputNickname = view1.findViewById(R.id.nickname);
 
 
        registerBtn.setOnClickListener(view -> {
@@ -86,7 +76,7 @@ public class RegisterFragment extends Fragment {
                    });
        });
 
-        return view;
+        return view1;
     }
 
     private void updateUserProfile() {

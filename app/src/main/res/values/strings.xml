@@ -10,4 +10,6 @@
     <string name="scoreboard">Scoreboard</string>
     <string name="next">Next</string>
     <string name="nickname">Nickname</string>
+    <string name="welcomeTo">Welcome to</string>
+    <string name="quizkids">Quiz Kids!</string>
 </resources>

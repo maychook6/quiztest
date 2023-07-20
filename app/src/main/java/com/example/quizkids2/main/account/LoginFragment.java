@@ -24,9 +24,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginFragment extends Fragment {
 
-    //TODO can be removed
-    private FirebaseFirestore db;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,22 +49,20 @@ public class LoginFragment extends Fragment {
                 return;
             }
 
+            //TODO use lamda expression
             mAuth.signInWithEmailAndPassword(usernameStr, passwordStr)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {  //TODO use lamda expression
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                //TODO extract to a method "showToast(String message)" and use it in the else statement
-                                Toast toast = Toast.makeText(getActivity(), "Login successful.", Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.TOP, 0, 300);
-                                toast.show();
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            //TODO extract to a method "showToast(String message)" and use it in the else statement
+                            Toast toast = Toast.makeText(getActivity(), "Login successful.", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 300);
+                            toast.show();
 
-                                new FragmentNavigator(getParentFragmentManager()).navigateToFragment(new MainScreenFragment(), Transition.ADD);
-                            } else {
-                                Toast toast = Toast.makeText(getActivity(), "Login failed.", Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.TOP, 0, 300);
-                                toast.show();
-                            }
+                            new FragmentNavigator(getParentFragmentManager()).navigateToFragment(new MainScreenFragment(), Transition.ADD);
+                        } else {
+                            Toast toast = Toast.makeText(getActivity(), "Login failed.", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.TOP, 0, 300);
+                            toast.show();
                         }
                     });
         });
