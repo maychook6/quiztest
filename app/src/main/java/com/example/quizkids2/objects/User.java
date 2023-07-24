@@ -1,9 +1,6 @@
 package com.example.quizkids2.objects;
 
 import com.google.firebase.firestore.DocumentId;
-
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class User {

@@ -13,6 +13,5 @@
         <item name="android:statusBarColor">@color/black</item>
         <item name="android:fontFamily">@font/niramit_semibold</item>
         <item name="android:textColor">@color/black</item>
-        <!-- Customize your theme here. -->
     </style>
 </resources>

@@ -30,53 +30,56 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view1 = inflater.inflate(R.layout.fragment_register, container, false);
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
         mAuth = FirebaseAuth.getInstance();
-        Button registerBtn = view1.findViewById(R.id.register_btn);
-        inputEmail = view1.findViewById(R.id.username);
-        inputPassword = view1.findViewById(R.id.password);
-        inputNickname = view1.findViewById(R.id.nickname);
+        Button registerBtn = view.findViewById(R.id.register_btn);
+        inputEmail = view.findViewById(R.id.username);
+        inputPassword = view.findViewById(R.id.password);
+        inputNickname = view.findViewById(R.id.nickname);
 
+        register(registerBtn);
 
-       registerBtn.setOnClickListener(view -> {
-           //TODO extract to a method "register()"
-           String email = inputEmail.getText().toString();
-           String password = inputPassword.getText().toString();
+        return view;
+    }
 
-           if (TextUtils.isEmpty(email)) {
-               Toast.makeText(getActivity(),"Enter username",Toast.LENGTH_SHORT).show();
-               return;
-           }
+    private void register(Button registerBtn) {
+        registerBtn.setOnClickListener(v -> {
+            String email = inputEmail.getText().toString();
+            String password = inputPassword.getText().toString();
+            String enterUsername = getString(R.string.enterUsername);
+            String enterPassword = getString(R.string.enterPassword);
+            String registerSuccess = getString(R.string.registerSuccess);
+            String registerFail = getString(R.string.registerFail);
 
-           if (TextUtils.isEmpty(password)) {
-               Toast.makeText(getActivity(),"Enter password",Toast.LENGTH_SHORT).show();
-               return;
-           }
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(getActivity(),enterUsername,Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-           mAuth.createUserWithEmailAndPassword(email, password)
-                   .addOnCompleteListener(task -> {
-                       if (task.isSuccessful()) {
-                           //TODO extract to a method "showToast(String message)" and use it in the else statement
-                           Toast toast = Toast.makeText(getActivity(), "Account created", Toast.LENGTH_SHORT);
-                           toast.setGravity(Gravity.TOP, 0, 300);
-                           toast.show();
+            if (password.length() < 6) {
+                Toast.makeText(getActivity(),enterPassword,Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                           openDialog();
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            showToast(registerSuccess);
 
-                           new FragmentNavigator(getParentFragmentManager()).navigateToFragment(new AccountFragment(), Transition.ADD);
+                            openDialog();
 
-                           updateUserProfile();
-                       } else {
-                           Toast toast = Toast.makeText(getActivity(), "Registration failed", Toast.LENGTH_LONG);
-                           toast.setGravity(Gravity.TOP, 0, 300);
-                           toast.show();
+                            updateUserProfile();
+                        } else {
+                            showToast(registerFail);
+                        }
+                    });
+        });
+    }
 
-                       }
-                   });
-       });
-
-        return view1;
+    private void showToast(String registerSuccess) {
+        Toast toast = Toast.makeText(getActivity(), registerSuccess, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP, 0, 300);
+        toast.show();
     }
 
     private void updateUserProfile() {

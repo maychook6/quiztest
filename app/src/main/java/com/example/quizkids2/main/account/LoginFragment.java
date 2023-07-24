@@ -2,7 +2,6 @@ package com.example.quizkids2.main.account;
 import com.example.quizkids2.R;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -16,11 +15,7 @@ import android.widget.Toast;
 import com.example.quizkids2.main.mainScreen.MainScreenFragment;
 import com.example.quizkids2.main.utils.FragmentNavigator;
 import com.example.quizkids2.main.utils.Transition;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginFragment extends Fragment {
 
@@ -29,44 +24,49 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        Button loginBtn = view.findViewById(R.id.login_btn);
+        Button loginBtn = view.findViewById(R.id.loginBtn);
         EditText username = view.findViewById(R.id.username);
         EditText password = view.findViewById(R.id.password);
 
         loginBtn.setOnClickListener(v -> {
-            //TODO extract to a method "login()"
-            String usernameStr, passwordStr;
-            usernameStr = username.getText().toString();
-            passwordStr = password.getText().toString();
-
-            if (TextUtils.isEmpty(usernameStr)) {
-                Toast.makeText(getActivity(),"Enter username",Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (TextUtils.isEmpty(passwordStr)) {
-                Toast.makeText(getActivity(),"Enter password",Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            //TODO use lamda expression
-            mAuth.signInWithEmailAndPassword(usernameStr, passwordStr)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            //TODO extract to a method "showToast(String message)" and use it in the else statement
-                            Toast toast = Toast.makeText(getActivity(), "Login successful.", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP, 0, 300);
-                            toast.show();
-
-                            new FragmentNavigator(getParentFragmentManager()).navigateToFragment(new MainScreenFragment(), Transition.ADD);
-                        } else {
-                            Toast toast = Toast.makeText(getActivity(), "Login failed.", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.TOP, 0, 300);
-                            toast.show();
-                        }
-                    });
+            login(mAuth, username, password);
         });
 
         return view;
+    }
+
+    private void login(FirebaseAuth mAuth, EditText username, EditText password) {
+        String usernameStr = username.getText().toString();
+        String passwordStr = password.getText().toString();
+        String enterUsername = getString(R.string.enterUsername);
+        String enterPassword = getString(R.string.enterPassword);
+        String loginSuccess = getString(R.string.loginSuccess);
+        String loginFail = getString(R.string.loginFail);
+
+        if (TextUtils.isEmpty(usernameStr)) {
+            Toast.makeText(getActivity(),enterUsername,Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(passwordStr)) {
+            Toast.makeText(getActivity(),enterPassword,Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(usernameStr, passwordStr)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        showToast(loginSuccess, Toast.LENGTH_SHORT);
+                        new FragmentNavigator(getParentFragmentManager()).navigateToFragment(new MainScreenFragment(), Transition.REPLACE, true);
+                    } else {
+                        showToast(loginFail, Toast.LENGTH_LONG);
+                    }
+                });
+    }
+
+    private void showToast(String text, int lengthShort) {
+        Toast toast = Toast.makeText(getActivity(), text, lengthShort);
+        toast.setGravity(Gravity.TOP, 0, 300);
+        toast.show();
     }
 }

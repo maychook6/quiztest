@@ -1,4 +1,5 @@
 package com.example.quizkids2.splash;
+
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.quizkids2.main.MainActivity;
@@ -8,7 +9,6 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 
 import android.view.View;
-import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,13 +27,14 @@ public class SplashActivity extends AppCompatActivity {
         ImageView trivia = findViewById(R.id.trivia);
 
 
-        new CountDownTimer(10000, 1000) {
+        new CountDownTimer(8000, 1000) {
             public void onTick(long millisUntilFinished) {
 
             }
             public void onFinish() {
                 startActivity( new Intent(SplashActivity.this, MainActivity.class));
                 finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         }.start();
 

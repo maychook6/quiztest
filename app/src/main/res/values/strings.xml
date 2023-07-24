@@ -8,8 +8,43 @@
     <string name="select_all">Select All</string>
     <string name="play">Play</string>
     <string name="scoreboard">Scoreboard</string>
+    <string name="howTo">How to play</string>
     <string name="next">Next</string>
+    <string name="submit">Submit</string>
+    <string name="change_language">Change Language</string>
+    <string name="english">english</string>
+    <string name="hebrew">עברית</string>
     <string name="nickname">Nickname</string>
     <string name="welcomeTo">Welcome to</string>
-    <string name="quizkids">Quiz Kids!</string>
+    <string name="welcome">Welcome\nQuiz kid</string>
+    <string name="quizkids">Quiz Kids</string>
+    <string name="pressAndPlay">Press play &amp; check your knowledge</string>
+    <string name="registerDialogMsd">Registration Successful, please login.</string>
+    <string name="goLogin">Go Login</string>
+    <string name="checkCategory">Please select at least one category, or select "choose all".</string>
+    <string name="okDialogBtn">Ok</string>
+    <string name="gotItDialogBtn">Got it</string>
+    <string name="mainScreenBtn">Main Screen</string>
+    <string name="notYet">Not yet!\nYou have </string>
+    <string name="minutesMsg"> minutes to go!</string>
+    <string name="closeDialogBtn">Close</string>
+    <string name="ready">Ready?</string>
+    <string name="set">Set</string>
+    <string name="go">Go!</string>
+    <string name="enterUsername">Enter username</string>
+    <string name="enterPassword">Password must be at least 6 characters</string>
+    <string name="loginSuccess">Login successful</string>
+    <string name="loginFail">Login failed</string>
+    <string name="registerSuccess">Account created</string>
+    <string name="registerFail">Registration failed</string>
+    <string name="secondsRemaining">Seconds remaining: </string>
+    <string name="highScoreBeaten">You\'ve beaten your highest score!\nWell done!\nHearts will be refilled in 15 minutes.</string>
+    <string name="disqualified">Oops!\nYou\'re out oh hearts\nCome back in 15 minutes.</string>
+    <string name="welcomeMsg">Welcome to Quiz Kids!</string>
+    <string name="howToPlayMsg">Here you can challenge yourself and learn new facts about music, history, science &amp; more.\n
+        First choose the categories you want to be quizzed on, then you can answer the questions on those categories.\n
+        You will have four different answers to choose from and 10 seconds to answer each of them.\n
+        But don\'t be hasty because you only have 3 hearts, which mean only 3 mistakes!\n
+        If you\'re out of hearts you\'ll have to wait 15 minutes for your hearts to refill.\n
+        So what are you waiting for? Go ahead and learn!</string>
 </resources>

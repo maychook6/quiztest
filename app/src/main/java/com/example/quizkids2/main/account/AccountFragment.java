@@ -1,5 +1,6 @@
 package com.example.quizkids2.main.account;
 import com.example.quizkids2.R;
+import com.example.quizkids2.main.LanguageFragment;
 import com.example.quizkids2.main.utils.FragmentNavigator;
 import com.example.quizkids2.main.utils.Transition;
 
@@ -16,19 +17,23 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        Button loginBtnMain = view.findViewById(R.id.login_btn_main); //TODO change to loginBtn (also view id)
-        Button registerBtnMain = view.findViewById(R.id.register_btn_main); //TODO change to registerBtn (also view id)
+        Button loginBtn = view.findViewById(R.id.loginBtn);
+        Button registerBtn = view.findViewById(R.id.registerBtn);
+        Button changeLanguage = view.findViewById(R.id.changeLanguage);
         FragmentNavigator fragmentNavigator =  new FragmentNavigator(getParentFragmentManager());
 
-        loginBtnMain.setOnClickListener(v -> {
-            fragmentNavigator.navigateToFragment(new LoginFragment(), Transition.ADD);
+        loginBtn.setOnClickListener(v -> {
+            fragmentNavigator.navigateToFragment(new LoginFragment(), Transition.REPLACE, true);
         });
 
-        registerBtnMain.setOnClickListener(v -> {
-            fragmentNavigator.navigateToFragment(new RegisterFragment(), Transition.ADD);
+        registerBtn.setOnClickListener(v -> {
+            fragmentNavigator.navigateToFragment(new RegisterFragment(), Transition.REPLACE, true);
+        });
+
+        changeLanguage.setOnClickListener(v -> {
+            fragmentNavigator.navigateToFragment(new LanguageFragment(), Transition.REPLACE, false);
         });
 
         return view;
     }
-
 }

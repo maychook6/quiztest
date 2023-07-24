@@ -8,25 +8,20 @@ import androidx.annotation.Nullable;
 
 import com.example.quizkids2.R;
 
-public class TimeDialogFragment extends androidx.fragment.app.DialogFragment {
+public class HowToPlayDialogFragment extends androidx.fragment.app.DialogFragment {
 
-    private final long time;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        String notYetMsg = getString(R.string.notYet);
-        String minutesMsg = getString(R.string.minutesMsg);
-        String dialogBtn = getString(R.string.closeDialogBtn);
-
+        String msg = getString(R.string.howToPlayMsg);
+        String title = getString(R.string.welcomeMsg);
+        String dialogBtn = getString(R.string.gotItDialogBtn);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(notYetMsg + " " + time + " " + minutesMsg)
+        builder.setMessage(msg)
                 .setNeutralButton(dialogBtn, (dialogInterface, i) -> dialogInterface.dismiss());
-
+        builder.setTitle(title);
         return builder.create();
-    }
-
-    public TimeDialogFragment(long time) {
-        this.time = time;
     }
 
 }

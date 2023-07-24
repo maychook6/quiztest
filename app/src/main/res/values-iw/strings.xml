@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quiz Kids</string>
+    <string name="email">אימייל</string>
+    <string name="password">סיסמה</string>
+    <string name="login">התחברות</string>
+    <string name="register">הרשמה</string>
+    <string name="start_game">התחל משחק</string>
+    <string name="select_all">בחר הכל</string>
+    <string name="play">שחק</string>
+    <string name="scoreboard">טבלת ניקוד</string>
+    <string name="howTo">כיצד לשחק</string>
+    <string name="next">הבא</string>
+    <string name="submit">שלח</string>
+    <string name="change_language">שנה שפה</string>
+    <string name="english">english</string>
+    <string name="hebrew">עברית</string>
+    <string name="nickname">כינוי</string>
+    <string name="welcomeTo">Welcome to</string>
+    <string name="welcome">ברוך הבא</string>
+    <string name="quizkids">Quiz Kids</string>
+    <string name="pressAndPlay">לחץ על ״שחק״ ובחן את הידע שלך</string>
+    <string name="registerDialogMsd">נרשמת בהצלחה, בבקשה הירשם.</string>
+    <string name="goLogin">לך להירשם</string>
+    <string name="checkCategory">בבקשה בחר קטגוריה אחת לפחות, או לחץ על ״בחר הכל״.</string>
+    <string name="okDialogBtn">אוקיי</string>
+    <string name="gotItDialogBtn">הבנתי</string>
+    <string name="mainScreenBtn">למסך הראשי</string>
+    <string name="notYet">עדיין לא! יש לך עוד</string>
+    <string name="minutesMsg"> דקות </string>
+    <string name="closeDialogBtn">סגור</string>
+    <string name="ready">היכון</string>
+    <string name="set">הכן</string>
+    <string name="go">צא!</string>
+    <string name="enterUsername">הכנס שם משתמש</string>
+    <string name="enterPassword">סיסמה חייבת להיות לפחות 6 תווים</string>
+    <string name="loginSuccess">התחברת בהצלחה</string>
+    <string name="loginFail">התחברות נכשלה</string>
+    <string name="registerSuccess">נרשמת בהצלחה</string>
+    <string name="registerFail">רישום נכשל</string>
+    <string name="secondsRemaining">שניות שנותרו: </string>
+    הגעת לשיא חדש!\nכל הכבוד!\nהלבבות יתמלאו בעוד 15 דקות.
+    <string name="highScoreBeaten">הגעת לשיא חדש!\nכל הכבוד!\nהלבבות יתמלאו בעוד 15 דקות.</string>
+    <string name="disqualified">אופס!\nנגמרו לך הלבבות\nחזור בעוד 15 דקות.</string>
+    <string name="welcomeMsg">ברוכים הבאים ל-Quiz Kids!</string>
+    <string name="howToPlayMsg">    כאן תוכלו לאתגר את עצמכם וללמוד עובדות חדשות על מוזיקה, היסטוריה, מדעים ועוד.\n
+        ראשית בחרו את הקטגוריות עליהן תרצו להיבחן, ואז תוכלו לענות על שאלות בקטגוריות אלו.\n
+        יהיו לכם 4 תשובות לבחור מהן ו-10 שניות לבחור תשובה.\n
+        אך אל תמהרו כי יש לכם רק 3 לבבות, מה שאומר שניתן לטעות 3 פעמים בלבד.\n
+        אם אזלו לכם הלבבות תיאלצו לחכות 15 דקות בשביל שהלבבות יתמלאו מחדש.\n
+        אז למה אתם מחכים? לכו ללמוד!</string>
+</resources>

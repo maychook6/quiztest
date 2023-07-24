@@ -7,39 +7,100 @@
     android:background="@color/pinkBackground"
     tools:context=".main.mainScreen.MainScreenFragment">
 
-    <TextView
-        android:id="@+id/welcomeLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat2"
+    <ImageView
+        android:id="@+id/questionMark1"
+        android:layout_width="268dp"
+        android:layout_height="372dp"
+        android:src="@drawable/question_mark3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTitle"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/questionMark2"
+        android:layout_width="115dp"
+        android:layout_height="225dp"
+        android:src="@drawable/question_mark1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bungee_shade"
+        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="@string/pressAndPlay"
+        android:textColor="@color/darkPink"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307" />
+
+
+    <Button
+        android:id="@+id/playBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/play"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/pinkGradient"
+        app:strokeWidth="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTitle"
+        app:layout_constraintVertical_bias="0.276" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linearLayoutCompat2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="115dp"
         android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/mainTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints">
-
-
-        <Button
-            android:id="@+id/playBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/play" />
 
         <Button
             android:id="@+id/scoreboardBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/scoreboard" />
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/scoreboard"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/howToPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:fontFamily="@font/niramit_semibold"
+            android:text="@string/howTo"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textAllCaps="false"/>
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

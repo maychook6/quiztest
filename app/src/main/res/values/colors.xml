@@ -30,5 +30,7 @@
     <color name="answeredPink">#DC61A3</color>
     <color name="wrongAnswer">#E16051</color>
     <color name="rightAnswer">#8FDE61</color>
+    <color name="darkOrange">#E26200</color>
+    <color name="darkPink">#B30066</color>
 
 </resources>

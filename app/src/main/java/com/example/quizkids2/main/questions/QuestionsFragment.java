@@ -27,40 +27,29 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Collections;
 
-
-//TODO remove unused imports
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TimePicker;
-import android.widget.Toast;
-import android.widget.ToggleButton;
-import androidx.appcompat.app.AppCompatActivity;
-import java.util.Calendar;
 
 public class QuestionsFragment extends Fragment implements RecyclerViewInterface {
     public static final String ARG_CATEGORIES_LIST = "categoriesChecked";
     private ArrayList<String> categories;
     private final List<QA> listQA = new ArrayList<>();
-    private TextView question; //TODO questionTextView or questionTV
-    private TextView roundTimer; //TODO what does round time mean, maybe just timerTextView or timerTV
-    private Button nextQ; //TODO rename to nextQuestionBtn
+    private TextView questionTV;
+    private TextView timerTV;
+    private CountDownTimer timer;
+    int randomIndex;
+    private Button nextQuestionBtn;
+    private Button submitAnswerBtn;
     private List<ImageView> hearts = new ArrayList<>();
     private boolean isCorrect = false;
-    private QuestionCustomAdapter adapter;
+    private AnswersCustomAdapter adapter;
     private User user;
     private Integer scoreCounter;
     private Integer heartCounter;
-    //TODO remove into method "getRandomIndex"
-    private final Random random = new Random();
-    //TODO No need to initiate this here (can remove " = random.nextInt(); " )
-    private Integer randomIndex = random.nextInt();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String secondsRemaining;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,33 +63,42 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
         ImageView heartNo3 = view.findViewById(R.id.heartNo1);
         hearts = Arrays.asList(heartNo1, heartNo2, heartNo3);
 
-        roundTimer = view.findViewById(R.id.timer);
-        question = view.findViewById(R.id.question);
+        timerTV = view.findViewById(R.id.timer);
+        questionTV = view.findViewById(R.id.question);
+        secondsRemaining = getString(R.string.secondsRemaining);
 
-        nextQ = view.findViewById(R.id.nextQ);
-        nextQ.setAlpha(.5f);
-        nextQ.setEnabled(false);
+        submitAnswerBtn = view.findViewById(R.id.submitAnswer);
+
+        nextQuestionBtn = view.findViewById(R.id.nextQuestion);
+        nextQuestionBtn.setAlpha(.5f);
+        nextQuestionBtn.setEnabled(false);
 
         RecyclerView recyclerView = view.findViewById(R.id.score);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new QuestionCustomAdapter(new ArrayList<>(), this);
+        adapter = new AnswersCustomAdapter(new ArrayList<>(), this);
 
         heartCounter = 3;
         scoreCounter = 0;
-        fetchData();
+        fetchUser();
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
 
-        nextQ.setOnClickListener(v -> {
+        submitAnswerBtn.setOnClickListener(v -> {
+            timer.cancel();
+            onSubmitOrFinish();
+        });
+
+        nextQuestionBtn.setOnClickListener(v -> {
+            submitAnswerBtn.setAlpha(1f);
+            submitAnswerBtn.setEnabled(true);
             updateQA();
         });
 
         return view;
     }
 
-    //TODO rename to fetchUser()
-    private void fetchData() {
+    private void fetchUser() {
         db = FirebaseFirestore.getInstance();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -110,14 +108,18 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 user = document.toObject(User.class);
-                fetchListQA();
+                fetchQaList();
             }
         });
     }
 
-    //TODO rename to fetchQaList
-    private void fetchListQA() {
+    private void fetchQaList() {
+        String language = Locale.getDefault().getLanguage();
         CollectionReference colRef = db.collection("qa");
+        if (language == "iw") {
+            colRef = db.collection("qaHebrew");
+        }
+
         colRef.whereIn("category", categories).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
@@ -138,21 +140,18 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
     }
 
     private void updateQA() {
-        if (heartCounter == 0) {
-            heartCounter = 3;
-        }
-
         if (listQA.size() > 0) {
             randomIndex =  getRandomIndex();
-            question.setText(listQA.get(randomIndex).getQuestion());
+            questionTV.setText(listQA.get(randomIndex).getQuestion());
             shuffleAnswers();
             adapter.updateAnswers(listQA.get(randomIndex).getAnswers());
-            resetTimer(nextQ);
+            resetTimer();
         }
     }
 
 
     private int getRandomIndex() {
+        Random random = new Random();
         return (listQA.size() == 1) ? 0 : random.nextInt(listQA.size() - 1);
     }
 
@@ -161,52 +160,63 @@ public class QuestionsFragment extends Fragment implements RecyclerViewInterface
         this.isCorrect = isCorrect;
     }
 
-    public void resetTimer(Button nextQ) {
+    public void resetTimer() {
         this.isCorrect = false;
-        nextQ.setEnabled(false);
-        new CountDownTimer(10000, 1000) {
+        nextQuestionBtn.setEnabled(false);
+        timer = new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                roundTimer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                timerTV.setText(secondsRemaining + " " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
-                adapter.onTimeout();
-
-                nextQ.setAlpha(1f);
-                nextQ.setEnabled(true);
-
-                if (isCorrect) {
-                    scoreCounter++;
-                    user.addQuestionCorrectId(listQA.get(randomIndex).getId());
-                    db.collection("users").document(user.getId()).update("questionsCorrectIds", FieldValue.arrayUnion(listQA.get(randomIndex).getId()));
-                    listQA.remove(listQA.get(randomIndex));
-                } else {
-                    heartCounter--;
-                    hearts.get(heartCounter).setVisibility(View.GONE);
-
-                    if (heartCounter == 0) {
-                        user.setTimeToPlay(System.currentTimeMillis());
-                        //TODO check if possible to marge line 192 and 194 to one update instead of two api calls
-                        db.collection("users").document(user.getId()).update("timeToPlay", System.currentTimeMillis());
-                        user.setCanPlay(false);
-                        db.collection("users").document(user.getId()).update("canPlay", false);
-
-                        nextQ.setEnabled(false);
-
-                        if (user.getScore() < scoreCounter) {
-                            user.setScore(scoreCounter);
-                            db.collection("users").document(user.getId()).update("score", scoreCounter);
-                            openDialog("You've beaten your highest score!\nWell done!\nHearts will be refilled in 15 minutes.", "Main screen", new MainScreenFragment());
-                        } else {
-                            scoreCounter = 0;
-                            openDialog("Oops!\nYou're out oh hearts\nCome back in 15 minutes.", "Main screen", new MainScreenFragment());
-                        }
-                    }
-                }
+                onSubmitOrFinish();
             }
         }.start();
 
+    }
+
+    private void onSubmitOrFinish() {
+        timerTV.setText(secondsRemaining + " 0");
+        adapter.onTimeout();
+
+        submitAnswerBtn.setAlpha(.5f);
+        submitAnswerBtn.setEnabled(false);
+
+        nextQuestionBtn.setAlpha(1f);
+        nextQuestionBtn.setEnabled(true);
+
+        if (isCorrect) {
+            scoreCounter++;
+            user.addQuestionCorrectId(listQA.get(randomIndex).getId());
+            db.collection("users").document(user.getId()).update("questionsCorrectIds", FieldValue.arrayUnion(listQA.get(randomIndex).getId()));
+            listQA.remove(listQA.get(randomIndex));
+        } else {
+            String highScoreBeaten = getString(R.string.highScoreBeaten);
+            String disqualified = getString(R.string.disqualified);
+            String mainScreenBtn = getString(R.string.mainScreenBtn);
+
+            heartCounter--;
+            hearts.get(heartCounter).setVisibility(View.GONE);
+
+            if (heartCounter == 0) {
+
+                user.setTimeToPlay(System.currentTimeMillis());
+                user.setCanPlay(false);
+                db.collection("users").document(user.getId()).update("timeToPlay", System.currentTimeMillis(),
+                        "canPlay", false);
+                nextQuestionBtn.setEnabled(false);
+
+                if (user.getScore() < scoreCounter) {
+                    user.setScore(scoreCounter);
+                    db.collection("users").document(user.getId()).update("score", scoreCounter);
+                    openDialog(highScoreBeaten, mainScreenBtn, new MainScreenFragment());
+                } else {
+                    scoreCounter = 0;
+                    openDialog(disqualified, mainScreenBtn, new MainScreenFragment());
+                }
+            }
+        }
     }
 
     public void shuffleAnswers() {

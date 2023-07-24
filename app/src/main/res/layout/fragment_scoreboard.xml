@@ -27,7 +27,7 @@
         android:fontFamily="@font/bungee_shade"
         android:text="@string/scoreboard"
         android:textSize="35dp"
-        android:textColor="#FF7810"
+        android:textColor="@color/darkOrange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
