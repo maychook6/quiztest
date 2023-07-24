@@ -1,4 +1,4 @@
-package com.example.quizkids2.main;
+package com.example.quizkids2.main.language;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDelegate;

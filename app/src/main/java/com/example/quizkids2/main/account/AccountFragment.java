@@ -1,6 +1,6 @@
 package com.example.quizkids2.main.account;
 import com.example.quizkids2.R;
-import com.example.quizkids2.main.LanguageFragment;
+import com.example.quizkids2.main.language.LanguageFragment;
 import com.example.quizkids2.main.utils.FragmentNavigator;
 import com.example.quizkids2.main.utils.Transition;
 
